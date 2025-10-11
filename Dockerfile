@@ -3,7 +3,6 @@ FROM n8nio/n8n:1.55.0
 
 # Simple startup wrapper so N8N_PORT matches Render's PORT
 COPY start-render.sh /start-render.sh
-RUN chmod +x /start-render.sh
 
-# No build step needed — the official image already contains n8n
-CMD ["/start-render.sh"]
+# Don't chmod on Render's build FS. Run with bash instead.
+CMD ["bash", "/start-render.sh"]
