@@ -5,4 +5,4 @@ FROM n8nio/n8n:1.55.0
 COPY start-render.sh /start-render.sh
 
 # Don't chmod on Render's build FS. Run with bash instead.
-CMD ["bash", "/start-render.sh"]
+CMD ["/bin/sh", "/start-render.sh"]
