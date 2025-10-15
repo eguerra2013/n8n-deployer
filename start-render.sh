@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-# Map Render’s port to what n8n expects
+# Map Render’s PORT to what n8n expects
 export N8N_PORT="${PORT:-5678}"
 
 # Optional: infer host if Render sets it
@@ -10,5 +10,11 @@ if [ -n "$RENDER_EXTERNAL_URL" ] && [ -z "$N8N_HOST" ]; then
   export N8N_HOST
 fi
 
-# Launch n8n using its built-in entrypoint
-exec /docker-entrypoint.sh n8n start
+# Debug info (optional)
+echo "Starting n8n on Render..."
+echo "PORT: $PORT"
+echo "N8N_PORT: $N8N_PORT"
+echo "N8N_HOST: $N8N_HOST"
+
+# Use full path to n8n binary (inside the container)
+exec node /usr/local/lib/node_modules/n8n/bin/n8n start
